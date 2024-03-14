@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Figure out how to hyperlink all allies and enemies so their names can be clicked on and users can go to their profiles -->
+
+<body>
+    <h1>Character Information</h1>
+    <div>
+        {% if character %}
+        <h1>Name: {{ character.name }}</h1>
+        <img src="{{ character.image }}" alt="Picture of {{character.name}}">
+        {% if character.bio_nationality is not none %}
+        <p>Nationality: {{ character.bio_nationality }}</p>
+        {% else %}
+        <p>Nationality: Unknown</p>
+        {% endif %}
+        {% if character.bio_ethnicity is not none %}
+        <p>Ethnicity: {{ character.bio_ethnicity }}</p>
+        {% else %}
+        <p>Ethnicity: Unknown</p>
+        {% endif %}
+        {% if character.bio_ages is not none %}
+        <p>Age: {{ character.bio_ages | join(', ') }}</p>
+        {% else %}
+        <p>Age: Unknown</p>
+        {% endif %}
+        {% if character.physical_description_gender is not none %}
+        <p>Gender: {{ character.physical_description_gender }}</p>
+        {% else %}
+        <p>Gender: Unknown</p>
+        {% endif %}
+        {% if character.personal_information_weapons_of_choice is not none %}
+        <p>Weapons of Choice: {{ character.personal_information_weapons_of_choice | join(', ') }}</p>
+        {% else %}
+        <p>Weapons of Choice: Unknown</p>
+        {% endif %}
+        {% if character.personal_information_fighting_styles is not none %}
+        <p>Fighting Styles: {{ character.personal_information_fighting_styles | join(', ') }}</p>
+        {% else %}
+        <p>Fighting Styles: Unknown</p>
+        {% endif %}
+        <h2>Allies</h2>
+        <ul>
+            {% if character.personal_information_allies is not none %}
+            {{ character.personal_information_allies | join(', ') }}
+            {% else %}
+            <p>Unknown</p>
+            {% endif %}
+        </ul>
+        <h2>Enemies</h2>
+        <ul>
+            {% if character.personal_information_enemies is not none %}
+            {{ character.personal_information_enemies | join(', ') }}
+            {% else %}
+            <p>Unknown</p>
+            {% endif %}
+        </ul>
+
+        {% else %}
+        <p>No character found.</p>
+        {% endif %}
+    </div>
+    {% for character in characters %}
+    <li><a href="{{ character.url }}">{{ character.name }}</a></li>
+    {% endfor %}
+</body>
+
+{% endblock %}

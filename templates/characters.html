@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<link rel="stylesheet" href="/static/characters.css">
+
+<body>
+    <h1>All Characters</h1>
+    <div class="character-grid">
+        {% for character in characters %}
+        <div class="character">
+            <h3><a href="{{ url_for('get_character', id=character.id) }}">{{ character.name }}</a></h3>
+            <img src="{{ character.image }}" alt="Picture of {{character.name}}">
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+{% endblock %}
