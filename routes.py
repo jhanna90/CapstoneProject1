@@ -1,14 +1,13 @@
-from flask import render_template, request, redirect, url_for, session
-from app import app  # Import the Flask app instance
+from flask import render_template, request, redirect, url_for, session, jsonify
+from app import app
 from models import (
     User,
     db,
     Characters,
     Questions,
-)  # Import your User model and db instance
+)
 import random
 import requests
-import jsonify
 from flask_bcrypt import bcrypt
 
 
@@ -17,6 +16,7 @@ def homepage():
     return render_template("homepage.html")
 
 
+# Info route shows basic information about the show.
 @app.route("/info", methods=["GET"])
 def show_info():
     """Returns all information about the Avatar"""
@@ -30,18 +30,17 @@ def show_info():
         return "Failed to fetch information from the API", 500
 
 
+# Characters route retrieves characters from the database and renders them on the client side.
 @app.route("/characters", methods=["GET"])
 def get_characters():
-    characters = Characters.query.all()  # Query all characters from the database
+    characters = Characters.query.all()
     return render_template("characters.html", characters=characters)
 
 
+# Episodes route shows a user all the episodes in the series. A filter was added so a user can see each episode per season.
 @app.route("/episodes", methods=["GET"])
 def show_episodes():
-    # Get the selected season from the request
     selected_season = request.args.get("season")
-
-    # Fetch episodes from the API
     url = "https://api.sampleapis.com/avatar/episodes"
     response = requests.get(url)
     if response.status_code == 200:
@@ -69,7 +68,6 @@ def show_episodes():
 def trivia_questions():
     """Returns a list of randomly selected Avatar related questions from the database."""
     try:
-        # Fetch all questions from the database
         all_questions = Questions.query.all()
 
         if all_questions:
@@ -77,7 +75,6 @@ def trivia_questions():
             selected_questions = random.sample(
                 all_questions, min(len(all_questions), 10)
             )
-
             # Store correct answers in session
             correct_answers = {
                 question.id: question.correct_answer for question in selected_questions
@@ -91,6 +88,7 @@ def trivia_questions():
         return jsonify({"error": str(e)}), 500
 
 
+# Submits quiz answers and saves them to session to be used by the evaluation route
 @app.route("/submit_answers", methods=["POST"])
 def submit_answers():
     if request.method == "POST":
@@ -101,6 +99,7 @@ def submit_answers():
         return redirect(url_for("evaluate_answers"))
 
 
+# Evaluates and displays user's answer to trivia quiz
 @app.route("/evaluate_answers", methods=["GET"])
 def evaluate_answers():
     submitted_answers = session.get("submitted_answers")
@@ -111,9 +110,7 @@ def evaluate_answers():
     if submitted_answers and correct_answers:
         score = 0
         for question_id, submitted_answer in submitted_answers.items():
-            # Ensure that question_id is converted to integer
             question_id = int(question_id)
-            # Retrieve the correct answer from the database using question_id
             question = Questions.query.filter_by(id=question_id).first()
             if question and submitted_answer == question.correct_answer:
                 score += 1
@@ -130,9 +127,10 @@ def evaluate_answers():
         )
 
 
+# Individual Character Profile Page
 @app.route("/character/<int:id>", methods=["GET"])
 def get_character(id):
-    character = Characters.query.get(id)  # Retrieve character by id from the database
+    character = Characters.query.get(id)
 
     if character:
         return render_template(
@@ -150,10 +148,7 @@ def signup():
         username = request.form["username"]
         password = request.form["password"]
         email = request.form["email"]
-        favorite_character = request.form.get(
-            "favorite_character"
-        )  # Assuming the form value is the character's ID
-
+        favorite_character = request.form.get("favorite_character")
         # Generate salt and hash the password
         salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(password.encode("utf-8"), salt)
@@ -165,14 +160,10 @@ def signup():
             email=email,
             favorite_character=favorite_character,
         )
-
-        # Add the new user to the database
         db.session.add(new_user)
         db.session.commit()
 
         return render_template("signedUp.html", username=username)
-
-    # Fetch characters from the database
     characters = Characters.query.all()
 
     return render_template("signup.html", characters=characters)
@@ -184,16 +175,13 @@ def login():
     if request.method == "POST":
         username_or_email = request.form["username_or_email"]
         password = request.form["password"]
-
-        # Find user by username or email
         user = User.query.filter(
             (User.username == username_or_email) | (User.email == username_or_email)
-        ).first()  # Use .first() to get the first user object or None if not found
+        ).first()
 
         if user:
             # Verify the password
             if bcrypt.checkpw(password.encode("utf-8"), user.password.encode("utf-8")):
-                # Password is correct, set session variable
                 session["user_id"] = user.id
                 return render_template("login_result.html", username=user.username)
             else:
@@ -205,10 +193,8 @@ def login():
     return render_template("login.html")
 
 
-# Your logout route
+# Logout route
 @app.route("/logout", methods=["POST"])
 def logout():
-    # Remove the user_id from the session if it's there
     session.pop("user_id", None)
-    # Redirect to the homepage or any other desired page
     return render_template("logout.html")

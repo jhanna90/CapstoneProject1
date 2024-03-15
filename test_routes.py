@@ -16,7 +16,7 @@ class TestRoutes(TestCase):
                 b"Everything Changed When The Fire Nation Attacked", response.data
             )
 
-    # The show_info route should return the info template with information from the API.
+    # The info route should return the info template with information from the API.
     def test_show_info_route(self):
         with app.test_client() as client:
             response = client.get("/info")

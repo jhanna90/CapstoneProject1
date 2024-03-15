@@ -2,7 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from flask_bcrypt import Bcrypt
 
-
 db = SQLAlchemy()
 
 bcrypt = Bcrypt()
@@ -24,6 +23,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(300), unique=True, nullable=False)
     favorite_character = db.Column(db.String(300))
 
+    # Register user password hashing
     @classmethod
     def register(cls, username, pwd):
         """Register user w/hashed password & return user."""
@@ -35,49 +35,18 @@ class User(db.Model, UserMixin):
         # return instance of user w/username and hashed pwd
         return cls(username=username, password=hashed_utf8)
 
-    # end_register
-
-    # start_authenticate
+    # User authentication
     @classmethod
     def authenticate(cls, username, pwd):
         """Validate that user exists & password is correct.
 
         Return user if valid; else return False.
         """
-
         u = User.query.filter_by(username=username).first()
-
         if u and bcrypt.check_password_hash(u.password, pwd):
-            # return user instance
             return u
         else:
             return False
-
-    # end_authenticate
-
-
-# Define the Info table
-class Info(db.Model):
-    """This class represents the Information table about the show"""
-
-    __tablename__ = "info"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    synopsis = db.Column(db.Text, nullable=False)
-    years_aired = db.Column(db.String(100), nullable=False)
-    genres = db.Column(db.String(200), nullable=False)
-    creators = db.Column(db.String(500))
-
-    def make_info_dict(self):
-        """Serialzes information into a dictionary so that it can be jsonified"""
-
-        return {
-            "id": self.id,
-            "synopsis": self.synopsis,
-            "yearsAired": self.yearsAired,
-            "genres": self.genres,
-            "creators": self.creators,
-        }
 
 
 # Define the Characters table
@@ -87,15 +56,9 @@ class Characters(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     image = db.Column(db.String(255))
-    bio_nationality = db.Column(
-        db.String(255)
-    )  # Update column name to match the one in your PostgreSQL table
-    bio_ethnicity = db.Column(
-        db.String(255)
-    )  # Update column name to match the one in your PostgreSQL table
-    bio_ages = db.Column(
-        db.String(255)
-    )  # Update column name to match the one in your PostgreSQL table
+    bio_nationality = db.Column(db.String(255))
+    bio_ethnicity = db.Column(db.String(255))
+    bio_ages = db.Column(db.String(255))
     physical_description_gender = db.Column(db.String(255))
     personal_information_allies = db.Column(db.String(255))
     personal_information_enemies = db.Column(db.String(255))
@@ -120,29 +83,6 @@ class Characters(db.Model):
         }
 
 
-# Define the Episodes table
-class Episodes(db.Model):
-    __tablename__ = "episodes"
-    id = db.Column(db.Integer, primary_key=True)
-    season = db.Column(db.Text)
-    num_in_season = db.Column(db.Text)
-    title = db.Column(db.Text)
-    directed_by = db.Column(db.Text)
-    original_air_date = db.Column(db.Text)
-
-    def make_episodes_dict(self):
-        """Serialzes information into a dictionary so that it can be jsonified"""
-
-        return {
-            "id": self.id,
-            "season": self.season,
-            "num_in_season": self.num_in_season,
-            "title": self.title,
-            "directed_by": self.directed_by,
-            "original_air_date": self.original_air_date,
-        }
-
-
 # Define the Questions table
 class Questions(db.Model):
     __tablename__ = "questions"
@@ -157,6 +97,6 @@ class Questions(db.Model):
         return {
             "id": self.id,
             "question": self.question,
-            "possible_answer": self.possible_answers,
+            "possible_answers": self.possible_answers,
             "correct_answer": self.correct_answer,
         }

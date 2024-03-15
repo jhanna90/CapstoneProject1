@@ -12,8 +12,6 @@ CREATE TABLE users (
     favorite_character VARCHAR(300)
 );
 
-
--- Create characters table
 CREATE TABLE characters (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -28,7 +26,6 @@ CREATE TABLE characters (
     personal_information_fighting_styles TEXT[] DEFAULT '{}'
 );
 
--- Insert character data
 INSERT INTO characters (name, image, bio_nationality, bio_ethnicity, bio_ages, physical_description_gender, personal_information_allies, personal_information_enemies, personal_information_weapons_of_choice, personal_information_fighting_styles)
 VALUES
     ('Aang', 'https://static.wikia.nocookie.net/avatar/images/a/ae/Aang_at_Jasmine_Dragon.png', 'Southern Air Temple', 'Air Nomad', '{"112 (biologically 12) in Avatar: The Last Airbender[3]","113-114 (biologically 13-14) in The Promise trilogy[4]","114-115 (biologically 14-15) in The Search and The Rift trilogies[5]","165 (biologically 66) at death[6]"}', 'Male', '{"Appa","Katara","Momo","Sokka","Tenzin","Toph","Zuko","King Bumi","Bumi","Gyatso","Hakoda","Iroh","Kya","Suki","Kuzon","lion turtle","all Avatars"}', '{"Azula","Ozai","Zhao","Zuko (formerly)","Combustion Man","Long Feng","Sozin","Yakone","Joo Dee","the Dai Li"}', '{"The elements","glider staff"}', '{"Airbending","waterbending (Northern and Southern style)","earthbending (Chu Gar Praying Mantis Kung Fu)","firebending (Dancing Dragon)","energybending"}'),
