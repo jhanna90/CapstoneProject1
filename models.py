@@ -1,5 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
 from flask_bcrypt import Bcrypt
 
 db = SQLAlchemy()
@@ -14,7 +13,7 @@ def connect_db(app):
     db.init_app(app)
 
 
-class User(db.Model, UserMixin):
+class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
