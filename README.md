@@ -1,10 +1,14 @@
 # CapstoneProject1
 
-API being used - https://sampleapis.com/api-list/avatar
-https://sampleapis.com/api-list/avatar/info
-https://sampleapis.com/api-list/avatar/characters
-https://sampleapis.com/api-list/avatar/episodes
-https://sampleapis.com/api-list/avatar/questions
+API being used - https://sampleapis.com/api-list/avatar, 
+
+https://sampleapis.com/api-list/avatar/info, 
+
+https://sampleapis.com/api-list/avatar/characters, 
+
+https://sampleapis.com/api-list/avatar/episodes, 
+
+https://sampleapis.com/api-list/avatar/questions, 
 
 # Avatar The Last Airbender Fan Website
 View the deployed website here
