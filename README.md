@@ -27,8 +27,11 @@ User Accounts: Personalized user accounts allow users to save favorite character
 
 # Why These Features?
 Character Profiles: Fans often have favorite characters they want to learn more about. Providing detailed profiles allows users to deepen their understanding and appreciation of their favorite characters.
+
 Episode Guide: With a complex and rich storyline, having an episode guide helps users navigate through the series, especially if they want to revisit specific episodes.
+
 Trivia Quiz: Adding a trivia quiz adds an element of interactivity and fun to the website. It allows fans to test their knowledge and challenge themselves in a friendly competition.
+
 User Accounts: We enhance user engagement and provide a personalized experience by allowing users to create accounts.
 
 # Standard User Flow:
