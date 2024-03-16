@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<link rel="stylesheet" href="/static/character.css">
 
 <body>
     <h1>Character Information</h1>
@@ -8,38 +9,51 @@
         {% if character %}
         <h1>Name: {{ character.name }}</h1>
         <img src="{{ character.image }}" alt="Picture of {{character.name}}">
+        <br>
         {% if character.bio_nationality is not none %}
-        <p>Nationality: {{ character.bio_nationality }}</p>
+        <strong>Nationality:</strong>
+        <p> {{ character.bio_nationality }}</p>
         {% else %}
-        <p>Nationality: Unknown</p>
+        <strong>Nationality:</strong>
+        <p> Unknown</p>
         {% endif %}
         {% if character.bio_ethnicity is not none %}
-        <p>Ethnicity: {{ character.bio_ethnicity }}</p>
+        <strong>Ethnicity:</strong>
+        <p>{{ character.bio_ethnicity }}</p>
         {% else %}
-        <p>Ethnicity: Unknown</p>
+        <strong>Ethnicity:</strong>
+        <p> Unknown</p>
         {% endif %}
         {% if character.bio_ages is not none %}
-        <p>Age: {{ character.bio_ages | join(', ') }}</p>
+        <strong>Age:</strong>
+        <p>{{ character.bio_ages | join(', ') }}</p>
         {% else %}
-        <p>Age: Unknown</p>
+        <strong>Age:</strong>
+        <p> Unknown</p>
         {% endif %}
         {% if character.physical_description_gender is not none %}
-        <p>Gender: {{ character.physical_description_gender }}</p>
+        <strong>Gender:</strong>
+        <p>{{ character.physical_description_gender }}</p>
         {% else %}
-        <p>Gender: Unknown</p>
+        <strong>Gender:</strong>
+        <p> Unknown</p>
         {% endif %}
         {% if character.personal_information_weapons_of_choice is not none %}
-        <p>Weapons of Choice: {{ character.personal_information_weapons_of_choice | join(', ') }}</p>
+        <strong>Weapons of Choice:</strong>
+        <p>{{ character.personal_information_weapons_of_choice | join(', ') }}</p>
         {% else %}
-        <p>Weapons of Choice: Unknown</p>
+        <strong>Weapons of Choice:</strong>
+        <p>Unknown</p>
         {% endif %}
         {% if character.personal_information_fighting_styles is not none %}
-        <p>Fighting Styles: {{ character.personal_information_fighting_styles | join(', ') }}</p>
+        <strong>Fighting Styles:</strong>
+        <p> {{ character.personal_information_fighting_styles | join(', ') }}</p>
         {% else %}
-        <p>Fighting Styles: Unknown</p>
+        <strong>Fighting Styles:</strong>
+        <p> Unknown</p>
         {% endif %}
         <h2>Allies</h2>
-        <ul>
+        <ul id="allies">
             {% if character.personal_information_allies is not none %}
             {{ character.personal_information_allies | join(', ') }}
             {% else %}
@@ -47,7 +61,7 @@
             {% endif %}
         </ul>
         <h2>Enemies</h2>
-        <ul>
+        <ul id="enemies">
             {% if character.personal_information_enemies is not none %}
             {{ character.personal_information_enemies | join(', ') }}
             {% else %}
@@ -59,9 +73,6 @@
         <p>No character found.</p>
         {% endif %}
     </div>
-    {% for character in characters %}
-    <li><a href="{{ character.url }}">{{ character.name }}</a></li>
-    {% endfor %}
 </body>
 
 {% endblock %}

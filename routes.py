@@ -81,7 +81,7 @@ def trivia_questions():
             }
             session["correct_answers"] = correct_answers
 
-            return render_template("questions.html", questions=selected_questions)
+            return render_template("trivia.html", questions=selected_questions)
         else:
             return jsonify({"error": "No questions found in the database"}), 404
     except Exception as e:
@@ -116,14 +116,14 @@ def evaluate_answers():
                 score += 1
 
         return render_template(
-            "result.html",
+            "triviaResults.html",
             score=score,
             submitted_answers=submitted_answers,
             correct_answers=correct_answers,
         )
     else:
         return render_template(
-            "result.html", score=0, submitted_answers={}, correct_answers={}
+            "triviaResults.html", score=0, submitted_answers={}, correct_answers={}
         )
 
 
@@ -183,10 +183,10 @@ def login():
             # Verify the password
             if bcrypt.checkpw(password.encode("utf-8"), user.password.encode("utf-8")):
                 session["user_id"] = user.id
-                return render_template("login_result.html", username=user.username)
+                return render_template("loginResult.html", username=user.username)
             else:
                 return render_template(
-                    "login_result.html", message="Invalid username/email or password"
+                    "loginResult.html", message="Invalid username/email or password"
                 )
 
     # If the request method is not POST or the login was unsuccessful, render the login form

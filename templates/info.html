@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<link rel="stylesheet" href="/static/info.css">
 
 <body>
     <h1>Long Ago...</h1>
     {% for info in info %}
-    <p><strong>Synopsis:</strong> {{ info.synopsis }}</p>
-    <p><strong>Years Aired:</strong> {{ info.yearsAired }}</p>
-    <p><strong>Genres:</strong> {{ ['Animation', 'Action', 'Adventure', 'Family', 'Fantasy', 'Mystery'] | join(', ') }}
+    <strong>Synopsis:</strong>
+    <p>{{ info.synopsis }}</p>
+    <strong>Years Aired:</strong>
+    <p>{{ info.yearsAired }}</p>
+    <strong>Genres:</strong>
+    <p> {{ ['Animation', 'Action', 'Adventure', 'Family', 'Fantasy', 'Mystery'] | join(', ') }}
     </p>
-    <p><strong>Creators:</strong> {% set creators = [{'name': 'Michael Dante DiMartino', 'url':
+    <strong>Creators:</strong>
+    <p> {% set creators = [{'name': 'Michael Dante DiMartino', 'url':
         'https://www.imdb.com/name/nm0227204/'}, {'name': 'Bryan Konietzko', 'url':
         'https://www.imdb.com/name/nm1665983/'}] %}
         {% for creator in creators %}

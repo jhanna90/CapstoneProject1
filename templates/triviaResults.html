@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/triviaResults.css">
+
+<body>
+    <h1>Trivia Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Your Answer
+                    <hr>
+                </th>
+                <hr>
+                <th>Correct Answer
+                    <hr>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question_id, submitted_answer in submitted_answers.items() %}
+            <tr>
+                <td>{{ submitted_answer }}
+                </td>
+                <td>
+                    {% if question_id in correct_answers %}
+                    {{ correct_answers[question_id] }}
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <h2>Your Score: {{ score }} out of {{ submitted_answers|length }}</h2>
+    <form action="/questions" method="GET">
+        <button type="submit" class="btn btn-sm btn-secondary">Restart Quiz</button>
+    </form>
+</body>
+{% endblock %}

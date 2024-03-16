@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<link rel="stylesheet" href="/static/episodes.css">
 
 <body>
     <h1>List of Episodes</h1>
 
 
     <form action="/episodes" method="GET">
-        <label for="season">Select Season:</label>
-        <select id="season" name="season">
+        <label for="season"><strong>Select Season:</strong></label>
+        <select id="season" name="season" class="season-filter">
             <option value="">All Seasons</option>
             {% set unique_seasons = [] %}
             {% for episode in episodes %}
@@ -18,20 +19,18 @@
             {% endif %}
             {% endfor %}
         </select>
-        <button type="submit" class="btn btn-primary">Filter</button>
+        <button type="submit" class="btn btn-md btn-secondary">Filter</button>
     </form>
 
 
     <ul>
         {% for episode in episodes %}
-        <li>
-            <strong>Title:</strong> {{ episode.Title }}<br>
-            <strong>Season:</strong> {{ episode.Season }}<br>
-            <strong>Episode Number:</strong> {{ episode.NumInSeason }}<br>
-            <strong>Directed By:</strong> {{ episode.DirectedBy }}<br>
-            <strong>Original Air Date:</strong> {{ episode.OriginalAirDate }}<br>
-        </li>
-        <br>
+        <p><b>Season: </b>{{ episode.Season }}</p>
+        <p><b>Episode Number:</b> {{ episode.NumInSeason }}</p>
+        <p><b>Title:</b> {{ episode.Title }}</p>
+        <p><b>Directed By:</b> {{ episode.DirectedBy }}</p>
+        <p><b>Original Air Date:</b> {{ episode.OriginalAirDate }}</p>
+        <hr>
         {% endfor %}
     </ul>
 </body>

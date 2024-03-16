@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h2>User Registration!</h2>
+<link rel="stylesheet" href="/static/signup.css">
+<h1>User Registration!</h1>
 <form method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required><br><br>
@@ -20,7 +20,7 @@
         {% endfor %}
     </select><br><br>
 
-    <input type="submit" value="Sign Up" class="btn btn-primary">
+    <input type="submit" value="Sign Up" class="btn btn-secondary">
 </form>
 
 

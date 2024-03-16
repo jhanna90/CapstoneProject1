@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/trivia.css">
+
+<body>
+    <h1>Trivia Questions!</h1>
+    <form method="POST" action="/submit_answers">
+        {% for question in questions %}
+        <h6>{{ question.question }}</h6>
+        {% for answer in question.possible_answers %}
+        <label>
+            <input type="radio" name="{{ question.id }}" value="{{ answer }}">{{ answer }}
+        </label>
+        {% endfor %}
+        </select>
+        <hr>
+        {% endfor %}
+        <button type="submit" class="btn btn-sm btn-secondary">Submit Answers</button>
+    </form>
+</body>
+{% endblock %}

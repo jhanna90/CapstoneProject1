@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/loginResult.css">
+
+<body>
+    {% if username %}
+    <h1> Welcome, {{ username }}!</h1>
+    <a href="{{ url_for('homepage') }}" class="btn btn-secondary">Go to Homepage</a>
+    {% else %}
+    <h1>Unable to Login</h1>
+    <h3>Invalid username/email or password. Please Try again!</h3>
+    <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+    {% endif %}
+</body>
+{% endblock %}

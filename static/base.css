@@ -1,0 +1,32 @@
+body {
+    background-color: #F9EFE3;
+}
+
+.btn {
+    color: #F9EFE3;
+    background-color: #EE7223;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background-color: #B6D7F4;
+}
+
+.navbar-nav .nav-item .btn-secondary:hover {
+    background-color: #715447;
+    border-color: #715447;
+}
+
+.navbar-brand:hover {
+    color: #715447;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 10px;
+}
+
+.navbar-brand {
+    color: #EE7223;
+    margin-left: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

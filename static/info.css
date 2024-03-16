@@ -1,21 +1,5 @@
-.character-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    align-items: center;
-}
-
-.character {
-    border: 1px solid #ccc;
-    padding: 10px;
+body {
     text-align: center;
-    border-radius: 5%;
-}
-
-.character img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5%;
 }
 
 h1 {
@@ -26,7 +10,17 @@ h1 {
     color: #6E1700;
 }
 
-#char-name {
-    color: #6E1700;
+strong {
+    margin: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: x-large;
+    color: #6E1700;
+}
+
+p {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #6E1700;
+    font-size: large;
 }
