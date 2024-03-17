@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///avatar_db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
-app.secret_key = "shhh secret"
+app.secret_key = "#Avatarthelastairbender!2"
 db.init_app(app)
 from routes import *
 
